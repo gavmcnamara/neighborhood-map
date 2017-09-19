@@ -447,7 +447,7 @@ var vm =  {
     }
 
     vm.locations(tempLocations);
-    vm.markersArray(tempMarkers);
+    fvm.markersArray(tempMarkers);
   }
 }
 
