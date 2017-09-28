@@ -1,4 +1,10 @@
-'use strict';
+/*jshint -W069 */
+/*Disable Warning Justification:
+    Using bracket notation so Google Closure Compiler
+    ADVANCED_OPTIMIZATIONS will keep the original property names. */
+/*jshint loopfunc:true */
+/* global google, ko */
+
 var map;
 // Function to initialize the map within the map div
 var markersArray = [];
@@ -21,10 +27,7 @@ var locations = [
   {name: 'Aligator Lounge', location: { lat: 40.713911, lng: -73.948922}},
   {name: 'The Brooklyn Brewery', location: { lat: 40.721645, lng: -73.957258}},
   {name: 'Harefield Road', location: {lat: 40.71462, lng: -73.943416}}
-]
-
-
-function initMap() {
+];
 
 /********************
 
@@ -32,152 +35,165 @@ Personal map styles
 
 ********************/
 
-    // Create a styles array to customize the map.
-  var styles = [
-      {
-          "elementType": "geometry",
-          "stylers": [
-              {
-                  "hue": "#ff4400"
-              },
-              {
-                  "saturation": -68
-              },
-              {
-                  "lightness": -4
-              },
-              {
-                  "gamma": 0.72
-              }
-          ]
-      },
-      {
-          "featureType": "road",
-          "elementType": "labels.icon"
-      },
-      {
-          "featureType": "landscape.man_made",
-          "elementType": "geometry",
-          "stylers": [
-              {
-                  "hue": "#0077ff"
-              },
-              {
-                  "gamma": 3.1
-              }
-          ]
-      },
-      {
-          "featureType": "water",
-          "stylers": [
-              {
-                  "hue": "#00ccff"
-              },
-              {
-                  "gamma": 0.44
-              },
-              {
-                  "saturation": -33
-              }
-          ]
-      },
-      {
-          "featureType": "poi.park",
-          "stylers": [
-              {
-                  "hue": "#44ff00"
-              },
-              {
-                  "saturation": -23
-              }
-          ]
-      },
-      {
-          "featureType": "water",
-          "elementType": "labels.text.fill",
-          "stylers": [
-              {
-                  "hue": "#007fff"
-              },
-              {
-                  "gamma": 0.77
-              },
-              {
-                  "saturation": 65
-              },
-              {
-                  "lightness": 99
-              }
-          ]
-      },
-      {
-          "featureType": "water",
-          "elementType": "labels.text.stroke",
-          "stylers": [
-              {
-                  "gamma": 0.11
-              },
-              {
-                  "weight": 5.6
-              },
-              {
-                  "saturation": 99
-              },
-              {
-                  "hue": "#0091ff"
-              },
-              {
-                  "lightness": -86
-              }
-          ]
-      },
-      {
-          "featureType": "transit.line",
-          "elementType": "geometry",
-          "stylers": [
-              {
-                  "lightness": -48
-              },
-              {
-                  "hue": "#ff5e00"
-              },
-              {
-                  "gamma": 1.2
-              },
-              {
-                  "saturation": -23
-              }
-          ]
-      },
-      {
-          "featureType": "transit",
-          "elementType": "labels.text.stroke",
-          "stylers": [
-              {
-                  "saturation": -64
-              },
-              {
-                  "hue": "#ff9100"
-              },
-              {
-                  "lightness": 16
-              },
-              {
-                  "gamma": 0.47
-              },
-              {
-                  "weight": 2.7
-              }
-          ]
-      }
-  ];
+  // Create a styles array to customize the map.
+var styles = [
+    {
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "hue": "#ff4400"
+            },
+            {
+                "saturation": -68
+            },
+            {
+                "lightness": -4
+            },
+            {
+                "gamma": 0.72
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "labels.icon"
+    },
+    {
+        "featureType": "landscape.man_made",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "hue": "#0077ff"
+            },
+            {
+                "gamma": 3.1
+            }
+        ]
+    },
+    {
+        "featureType": "water",
+        "stylers": [
+            {
+                "hue": "#00ccff"
+            },
+            {
+                "gamma": 0.44
+            },
+            {
+                "saturation": -33
+            }
+        ]
+    },
+    {
+        "featureType": "poi.park",
+        "stylers": [
+            {
+                "hue": "#44ff00"
+            },
+            {
+                "saturation": -23
+            }
+        ]
+    },
+    {
+        "featureType": "water",
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "hue": "#007fff"
+            },
+            {
+                "gamma": 0.77
+            },
+            {
+                "saturation": 65
+            },
+            {
+                "lightness": 99
+            }
+        ]
+    },
+    {
+        "featureType": "water",
+        "elementType": "labels.text.stroke",
+        "stylers": [
+            {
+                "gamma": 0.11
+            },
+            {
+                "weight": 5.6
+            },
+            {
+                "saturation": 99
+            },
+            {
+                "hue": "#0091ff"
+            },
+            {
+                "lightness": -86
+            }
+        ]
+    },
+    {
+        "featureType": "transit.line",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "lightness": -48
+            },
+            {
+                "hue": "#ff5e00"
+            },
+            {
+                "gamma": 1.2
+            },
+            {
+                "saturation": -23
+            }
+        ]
+    },
+    {
+        "featureType": "transit",
+        "elementType": "labels.text.stroke",
+        "stylers": [
+            {
+                "saturation": -64
+            },
+            {
+                "hue": "#ff9100"
+            },
+            {
+                "lightness": 16
+            },
+            {
+                "gamma": 0.47
+            },
+            {
+                "weight": 2.7
+            }
+        ]
+    }
+];
+
+// This function uses jquery to show current weather in brooklyn
+jQuery(document).ready(function($) {
+  $.ajax({
+  url : "http://api.wunderground.com/api/001aa3b1038e4ffb/geolookup/conditions/q/NY/Brooklyn.json",
+  dataType : "jsonp",
+  success : function(parsed_json) {
+  var location = parsed_json['location']['city'];
+  var temp_f = parsed_json['current_observation']['temp_f'];
+  alert("Current temperature in " + location + " is: " + temp_f + " Farentheight");
+  }
+  });
+});
 
 /*************
 
 creating map
 
 *************/
-
+function initMap() {
   // Constructor creates a new map - only center and zoom are required.
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 40.721344, lng: -73.952636},
@@ -230,19 +246,19 @@ adding animation to markers and pushing markers into markersArray
 
 ***************/
 
-    // Two event listeners, one for mouse over and one for mouse out
-    // This will change the colors back and forth
-    marker.addListener('mouseover', function() {
-      this.setIcon(highlightedIcon);
-    });
-    marker.addListener('mouseout', function() {
-      this.setIcon(defaultIcon)
-    });
-      // Push the marker to our array of markers
-    markersArray.push(marker);
+  // Two event listeners, one for mouse over and one for mouse out
+  // This will change the colors back and forth
+  marker.addListener('mouseover', function() {
+    this.setIcon(highlightedIcon);
+  });
+  marker.addListener('mouseout', function() {
+    this.setIcon(defaultIcon);
+  });
+    // Push the marker to our array of markers
+  markersArray.push(marker);
 
-      // Extend the boundaries of the map for each marker
-    bounds.extend(marker.position);
+    // Extend the boundaries of the map for each marker
+  bounds.extend(marker.position);
 
 /****************
 
@@ -251,9 +267,9 @@ start of the infowindow
 ****************/
 
       // Create an onclick event to open an infowindow at each marker
-    marker.addListener('click', function() {
-      populateInfoWindow(this, largeInfoWindow);
-    });
+  marker.addListener('click', function() {
+    populateInfoWindow(this, largeInfoWindow);
+  });
   }
 
 
@@ -336,46 +352,34 @@ var vm =  {
  };
 
 
- vm.query = ko.observable('')
+ vm.query = ko.observable('');
  vm.search = function(value){
 
     var tempLocations = [];
     var tempMarkers = [];
 
-    for(var i in locations) {
+    for(var i = 0; i < locations.length; i ++) {
       if(locations[i].name.toLowerCase().indexOf(value.toLowerCase()) >= 0) {
         tempLocations.push(locations[i]);
 
     }
-    for( var i = 0; i < markersArray.length; i ++) {
-      if(markersArray[i].name.toLowerCase().indexOf(value.toLowerCase()) >= 0) {
-       markersArray[i].setMap(map);
+    for( var x = 0; x < markersArray.length; x ++) {
+      if(markersArray[x].name.toLowerCase().indexOf(value.toLowerCase()) >= 0) {
+       markersArray[x].setMap(map);
       } else {
-        markersArray[i].setMap(null)
+        markersArray[x].setMap(null);
       }
     }
 
     vm.locations(tempLocations);
     vm.markersArray(tempMarkers);
   }
-}
+};
 
 
 vm.query.subscribe(vm.search);
 ko.applyBindings(vm);
 
-// This function uses jquery to show current weather in brooklyn
-jQuery(document).ready(function($) {
-  $.ajax({
-  url : "http://api.wunderground.com/api/001aa3b1038e4ffb/geolookup/conditions/q/NY/Brooklyn.json",
-  dataType : "jsonp",
-  success : function(parsed_json) {
-  var location = parsed_json['location']['city'];
-  var temp_f = parsed_json['current_observation']['temp_f'];
-  alert("Current temperature in " + location + " is: " + temp_f + " Farentheight");
-  }
-  });
-});
 
-
+/*jshint +W069 */
 
