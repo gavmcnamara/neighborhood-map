@@ -1,9 +1,11 @@
 /*jshint -W069 */
+// panorama from that and set the options
+/* jshint ignore:start */
 /*Disable Warning Justification:
     Using bracket notation so Google Closure Compiler
     ADVANCED_OPTIMIZATIONS will keep the original property names. */
 /*jshint loopfunc:true */
-/* global google, ko */
+/* global google, ko*/
 
 var map;
 // Function to initialize the map within the map div
@@ -292,6 +294,7 @@ start of the infowindow
 Populating infowindow with googlemaps streetview API
 
 ******************************/
+ // panorama from that and set the options
 
   // This function populates the infowindow when the marker is clicked. We'll only allow
   // one infowindow which will open at the marker that is clicked, and populate based
@@ -311,9 +314,12 @@ Populating infowindow with googlemaps streetview API
 
       // In case the status is OK, which means the pano was found, compute the
       // position of the streetview image, then calculate the heading, then get a
-      // panorama from that and set the options
+
+
       function getStreetView(data, status) {
+
         if (status == google.maps.StreetViewStatus.OK) {
+
           var nearStreetViewLocation = data.location.latLng;
           var heading = google.maps.geometry.spherical.computeHeading(
             nearStreetViewLocation, marker.position);
@@ -332,13 +338,15 @@ Populating infowindow with googlemaps streetview API
             '<div>No Street View Found</div>');
         }
       }
+
+
       // Use streetview service to get the closest streetview image within
       // 50 meters of the markers position
       streetViewService.getPanoramaByLocation(marker.position, radius, getStreetView);
       // Open the infowindow on the correct marker.
       infowindow.open(map, marker);
     }
-  }
+  } /* jshint ignore:end */
 }
 /**********************
 
