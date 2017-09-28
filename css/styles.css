@@ -12,7 +12,7 @@ position: relative;
 }
 
 input {
-font-size: 12px;
+font-size: 30px;
 }
 
 
@@ -20,7 +20,7 @@ h1 {
 color: #525454;
 font-size: 22px;
 margin: 0 0 10px 0;
-text-align: center;
+text-align: left;
 }
 
 hr {
@@ -33,20 +33,21 @@ border: none;
 #map {
 bottom:0px;
 height: 100%;
-left: 362px;
+left: 480px;
 position: absolute;
 right: 0px;
 }
 
-.options-box {
+.sidebar {
 background: #fff;
 border: 1px solid #999;
-border-radius: 3px;
+border-radius: 4px;
 height: 100%;
-line-height: 35px;
-padding: 10px 10px 30px 10px;
+line-height: 45px;
+padding: 20px 20px 40px 20px;
 text-align: left;
-width: 340px;
+width: 440px;
+font-size: 35px;
 }
 
 #pano {
@@ -56,4 +57,25 @@ height: 200px;
 
 .text {
 font-size: 12px;
+}
+
+
+@media screen and (max-width: 480px) {
+    .sidebar {
+        font-size: 8px;
+        line-height: 35px;
+    }
+    #map {left: 160px;}
+    h1 { font-size: 8px; }
+    input { font-size: 10px; }
+}
+
+@media screen and (max-width: 768px) {
+    .sidebar {
+        font-size: 15px;
+        line-height: 35px;
+    }
+    #map {left: 240px;}
+    h1 { font-size: 15px; }
+    input { font-size: 20px; }
 }

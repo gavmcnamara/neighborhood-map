@@ -11,86 +11,16 @@ My Model with array of locations
 
 // Create a single latLng literal object.
 var locations = [
-  {
-  name: 'Pearls',
-  location:
-    {
-    lat: 40.717955,
-    lng: -73.95676
-    },
-  },
-  {
-  name: 'Dotory',
-  location:
-    {
-    lat: 40.70783,
-    lng: -73.955655
-    },
-  },
-  {
-  name: 'Umami Burger',
-  location:
-    {
-    lat: 40.7159,
-    lng: -73.9593
-    },
-  },
-  {
-  name: 'McCarren Park',
-  location:
-    {
-    lat: 40.721344,
-    lng: -73.952636
-    },
-  },
-  {
-  name: 'Cooper Park',
-  location:
-    {
-    lat: 40.7160,
-    lng: -73.9373
-    },
-  },
-  {
-  name: 'Grand Ferry Park',
-  location:
-    {
-    lat: 40.7166,
-    lng: -73.9670
-    },
-  },
-  {
-  name: 'The Whisky Brooklyn',
-  location:
-    {
-    lat: 40.72121,
-    lng: -73.95656
-    },
-  },
-  {
-  name: 'Aligator Lounge',
-  location:
-    {
-    lat: 40.713911,
-    lng: -73.948922
-    },
-  },
-  {
-  name: 'The Brooklyn Brewery',
-  location:
-    {
-    lat: 40.721645,
-    lng: -73.957258
-    },
-  },
-  {
-  name: 'Harefield Road',
-  location:
-    {
-    lat: 40.71462,
-    lng: -73.943416
-    },
-  }
+  {name: 'Pearls', location: { lat: 40.717955, lng: -73.95676 }},
+  {name: 'Dotory', location: { lat: 40.70783, lng: -73.955655 }},
+  {name: 'Umami Burger', location: { lat: 40.7159, lng: -73.9593 }},
+  {name: 'McCarren Park', location: { lat: 40.721344, lng: -73.952636}},
+  {name: 'Cooper Park', location: {lat: 40.7160, lng: -73.9373}},
+  {name: 'Grand Ferry Park', location:{lat: 40.7166, lng: -73.9670}},
+  {name: 'The Whisky Brooklyn', location: { lat: 40.72121, lng: -73.95656}},
+  {name: 'Aligator Lounge', location: { lat: 40.713911, lng: -73.948922}},
+  {name: 'The Brooklyn Brewery', location: { lat: 40.721645, lng: -73.957258}},
+  {name: 'Harefield Road', location: {lat: 40.71462, lng: -73.943416}}
 ]
 
 
@@ -433,4 +363,19 @@ var vm =  {
 
 vm.query.subscribe(vm.search);
 ko.applyBindings(vm);
+
+// This function uses jquery to show current weather in brooklyn
+jQuery(document).ready(function($) {
+  $.ajax({
+  url : "http://api.wunderground.com/api/001aa3b1038e4ffb/geolookup/conditions/q/NY/Brooklyn.json",
+  dataType : "jsonp",
+  success : function(parsed_json) {
+  var location = parsed_json['location']['city'];
+  var temp_f = parsed_json['current_observation']['temp_f'];
+  alert("Current temperature in " + location + " is: " + temp_f + " Farentheight");
+  }
+  });
+});
+
+
 
