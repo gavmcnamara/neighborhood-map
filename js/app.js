@@ -150,7 +150,7 @@ function initMap() {
     // mouses over the marker.
     var highlightedIcon = makeMarkerIcon('FFFF24');
 
-    var bounceIcon = google.maps.Animation.BOUNCE
+    var bounceIcon = google.maps.Animation.BOUNCE;
 
     /***********
 
@@ -173,7 +173,7 @@ function initMap() {
 
             animation: google.maps.Animation.DROP,
         });
-        vm.locations()[i].marker = marker
+        vm.locations()[i].marker = marker;
         var bouncingMarker = null;
 
         // clickListener creates function to bounce marker when clicked
@@ -185,7 +185,7 @@ function initMap() {
                 bouncingMarker = this;
             } else
                 bouncingMarker = null;
-        }
+        };
 
         google.maps.event.addListener(marker, 'click', clickListener);
         /**************
@@ -217,7 +217,7 @@ function initMap() {
         // Create an onclick event to open an infowindow at each marker
         var onClick = marker.addListener('click', function() {
             myInfoWindow(this, largeInfoWindow);
-            return onClick
+            return onClick;
         });
     }
 
@@ -245,10 +245,7 @@ function initMap() {
     ******************************/
     // panorama from that and set the options
 
-    // This function populates the infowindow when the marker is clicked. We'll only allow
-    // one infowindow which will open at the marker that is clicked, and populate based
-    // on that markers position.
-
+    // myInfoWindow populates the markers infowindow with foursquare API
     this.myInfoWindow = function(marker, infowindow) {
         if (infowindow.marker != marker) {
             infowindow.setContent('');
@@ -272,9 +269,8 @@ function initMap() {
                 self.windowInfo = '<h2> What are people saying about ' + marker.name + ' ? </h2>' + '<strong>' + locationComments.join('') + '</strong>';
             }).fail(function(jqXHR, textStatus, errorThrown) {
                 self.windowInfo = '<h2> What are people saying about ' + marker.name + ' ? </h2>' + '<h3>Ran into an issue... There has been a problem trying to retrieve the locatons info.</h3>';
-                console.log('Something went wrong! please try to refresh your page. ' + textStatus);
             });
-        };
+        }
 
         // place content in infowindow
         infowindow.setContent(self.windowInfo);
@@ -284,8 +280,8 @@ function initMap() {
         infowindow.addListener('closeclick', function() {
             infowindow.marker = null;
         });
-    }
-};
+    };
+}
 
 /**********************
 
@@ -302,16 +298,16 @@ var vm = {
 vm.query = ko.observable('');
 vm.showInfo = function(location) {
     google.maps.event.trigger(location.marker, 'click');
-}
+};
 
 vm.search = function(value) {
     var self = this;
 
     for (var i = 0; i < locations.length; i++) {
 
-        var match = locations[i].name.toLowerCase().indexOf(value.toLowerCase()) >= 0
-        vm.locations()[i].isShown(match)
-        vm.locations()[i].marker.setVisible(match)
+        var match = locations[i].name.toLowerCase().indexOf(value.toLowerCase()) >= 0;
+        vm.locations()[i].isShown(match);
+        vm.locations()[i].marker.setVisible(match);
 
     }
 };
