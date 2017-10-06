@@ -101,7 +101,7 @@ var locations = [{
     }
 ];
 
-
+/* jshint ignore:start */
 // This function uses jquery to show current weather in brooklyn
 jQuery(document).ready(function($) {
     $.ajax({
