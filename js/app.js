@@ -102,19 +102,6 @@ var locations = [{
 ];
 
 /* jshint ignore:start */
-// This function uses jquery to show current weather in brooklyn
-jQuery(document).ready(function($) {
-    $.ajax({
-        url: "http://api.wunderground.com/api/001aa3b1038e4ffb/geolookup/conditions/q/NY/Brooklyn.json",
-        dataType: "jsonp",
-        success: function(parsed_json) {
-            var location = parsed_json['location']['city'];
-            var temp_f = parsed_json['current_observation']['temp_f'];
-            alert("Current temperature in " + location + " is: " + temp_f + " Farentheight");
-        }
-    });
-});
-
 /*************
 
 creating map
@@ -269,11 +256,10 @@ function initMap() {
                 self.windowInfo = '<h2> What are people saying about ' + marker.name + ' ? </h2>' + '<strong>' + locationComments.join('') + '</strong>';
             }).fail(function(jqXHR, textStatus, errorThrown) {
                 self.windowInfo = '<h2> What are people saying about ' + marker.name + ' ? </h2>' + '<h3>Ran into an issue... There has been a problem trying to retrieve the locatons info.</h3>';
+            }).always(function() {
+                infowindow.setContent(windowInfo);
             });
         }
-
-        // place content in infowindow
-        infowindow.setContent(self.windowInfo);
 
         infowindow.open(map, marker);
 
@@ -312,11 +298,9 @@ vm.search = function(value) {
     }
 };
 
+function errorHandling() {
+    alert("There has been an error loading google maps, please try again later.");
+}
 
 vm.query.subscribe(vm.search);
 ko.applyBindings(vm);
-
-
-function errorHandling() {
-    alert("There has been an issue with your internet connection. Please make sure you're connected to the internet and ty again.");
-}
