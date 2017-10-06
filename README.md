@@ -2,7 +2,7 @@ fullstack-nanodegree
 
 Neighborhood Maps Project
 
-- This project uses google maps api and google maps street view api to show my favorite locations in Broooklyn
+- This project uses google maps api and foursquare api to show my favorite locations in Broooklyn with comments about each location
 - This project also uses wunderground api to show current weather in Brooklyn
 
 To see the projects outcome:

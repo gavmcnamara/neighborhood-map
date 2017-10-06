@@ -1,11 +1,3 @@
-// panorama from that and set the options
-/* jshint ignore:start */
-/*Disable Warning Justification:
-    Using bracket notation so Google Closure Compiler
-    ADVANCED_OPTIMIZATIONS will keep the original property names. */
-/*jshint loopfunc:true */
-/* global google, ko*/
-
 var map;
 // Function to initialize the map within the map div
 var markersArray = [];
@@ -17,26 +9,105 @@ My Model with array of locations
 ****************************/
 
 // Create a single latLng literal object.
-var locations = [
-    { name: 'Pearls', location: { lat: 40.717955, lng: -73.95676 } },
-    { name: 'Dotory', location: { lat: 40.70783, lng: -73.955655 } },
-    { name: 'Umami Burger', location: { lat: 40.7159, lng: -73.9593 } },
-    { name: 'McCarren Park', location: { lat: 40.721344, lng: -73.952636 } },
-    { name: 'Cooper Park', location: { lat: 40.7160, lng: -73.9373 } },
-    { name: 'Grand Ferry Park', location: { lat: 40.7166, lng: -73.9670 } },
-    { name: 'The Whisky Brooklyn', location: { lat: 40.72121, lng: -73.95656 } },
-    { name: 'Aligator Lounge', location: { lat: 40.713911, lng: -73.948922 } },
-    { name: 'The Brooklyn Brewery', location: { lat: 40.721645, lng: -73.957258 } },
-    { name: 'Harefield Road', location: { lat: 40.71462, lng: -73.943416 } }
+var locations = [{
+        name: 'Pearls',
+        location: {
+            lat: 40.717955,
+            lng: -73.95676
+        },
+        id: '5671fec0498e79759c2ce17b',
+        isShown: ko.observable(true)
+    },
+    {
+        name: 'Dotory',
+        location: {
+            lat: 40.70783,
+            lng: -73.955655
+        },
+        id: '52bf3053498e754b09a440b5',
+        isShown: ko.observable(true)
+    },
+    {
+        name: 'Umami Burger',
+        location: {
+            lat: 40.7159,
+            lng: -73.9593
+        },
+        id: '54233f50498e70470c230a9e',
+        isShown: ko.observable(true)
+    },
+    {
+        name: 'McCarren Park',
+        location: {
+            lat: 40.721344,
+            lng: -73.952636
+        },
+        id: '4081c500f964a52081f21ee3',
+        isShown: ko.observable(true)
+    },
+    {
+        name: 'Cooper Park',
+        location: {
+            lat: 40.7160,
+            lng: -73.9373
+        },
+        id: '4a3ff382f964a52022a41fe3',
+        isShown: ko.observable(true)
+    },
+    {
+        name: 'Grand Ferry Park',
+        location: {
+            lat: 40.7166,
+            lng: -73.9670
+        },
+        id: '45914f89f964a5202f401fe3',
+        isShown: ko.observable(true)
+    },
+    {
+        name: 'The Whisky Brooklyn',
+        location: {
+            lat: 40.72121,
+            lng: -73.95656
+        },
+        id: '4b6caaddf964a520ac4a2ce3',
+        isShown: ko.observable(true)
+    },
+    {
+        name: 'Aligator Lounge',
+        location: {
+            lat: 40.713911,
+            lng: -73.948922
+        },
+        id: '411ff900f964a520290c1fe3',
+        isShown: ko.observable(true)
+    },
+    {
+        name: 'The Brooklyn Brewery',
+        location: {
+            lat: 40.721645,
+            lng: -73.957258
+        },
+        id: '3fd66200f964a5205deb1ee3',
+        isShown: ko.observable(true)
+    },
+    {
+        name: 'Harefield Road',
+        location: {
+            lat: 40.71462,
+            lng: -73.943416
+        },
+        id: '43bbc5fdf964a520f02c1fe3',
+        isShown: ko.observable(true)
+    }
 ];
 
 
 // This function uses jquery to show current weather in brooklyn
-jQuery(document).ready(function ($) {
+jQuery(document).ready(function($) {
     $.ajax({
         url: "http://api.wunderground.com/api/001aa3b1038e4ffb/geolookup/conditions/q/NY/Brooklyn.json",
         dataType: "jsonp",
-        success: function (parsed_json) {
+        success: function(parsed_json) {
             var location = parsed_json['location']['city'];
             var temp_f = parsed_json['current_observation']['temp_f'];
             alert("Current temperature in " + location + " is: " + temp_f + " Farentheight");
@@ -52,7 +123,10 @@ creating map
 function initMap() {
     // Constructor creates a new map - only center and zoom are required.
     map = new google.maps.Map(document.getElementById('map'), {
-        center: { lat: 40.721344, lng: -73.952636 },
+        center: {
+            lat: 40.721344,
+            lng: -73.952636
+        },
         zoom: 13,
         styles: styles,
         mapTypeControl: false
@@ -88,33 +162,32 @@ function initMap() {
     for (var i = 0; i < locations.length; i++) {
         var position = locations[i].location;
         var name = locations[i].name;
+        var id = locations[i].id;
         // Create a marker per location and store in markers array.
         var marker = new google.maps.Marker({
             map: map,
             position: position,
             name: name,
             icon: defaultIcon,
+            id: id,
 
             animation: google.maps.Animation.DROP,
-
         });
+        vm.locations()[i].marker = marker
+        var bouncingMarker = null;
 
+        // clickListener creates function to bounce marker when clicked
+        var clickListener = function() {
+            if (bouncingMarker)
+                bouncingMarker.setAnimation(null);
+            if (bouncingMarker != this) {
+                this.setAnimation(google.maps.Animation.BOUNCE);
+                bouncingMarker = this;
+            } else
+                bouncingMarker = null;
+        }
 
-       var bouncingMarker = null;
-
-       var clickListener = function() {
-        if(bouncingMarker)
-          bouncingMarker.setAnimation(null);
-        if(bouncingMarker != this) {
-        this.setAnimation(google.maps.Animation.BOUNCE);
-        bouncingMarker = this;
-      } else
-        bouncingMarker = null;
-      }
-
-      google.maps.event.addListener(marker, 'click', clickListener);
-
-
+        google.maps.event.addListener(marker, 'click', clickListener);
         /**************
 
         adding animation to markers and pushing markers into markersArray
@@ -124,10 +197,10 @@ function initMap() {
         // Two event listeners, one for mouse over and one for mouse out
         // This will change the colors back and forth
 
-        marker.addListener('mouseover', function () {
+        marker.addListener('mouseover', function() {
             this.setIcon(highlightedIcon);
         });
-        marker.addListener('mouseout', function () {
+        marker.addListener('mouseout', function() {
             this.setIcon(defaultIcon);
         });
         // Push the marker to our array of markers
@@ -141,12 +214,14 @@ function initMap() {
         start of the infowindow
 
         ****************/
-
         // Create an onclick event to open an infowindow at each marker
-        marker.addListener('click', function () {
-            populateInfoWindow(this, largeInfoWindow);
+        var onClick = marker.addListener('click', function() {
+            myInfoWindow(this, largeInfoWindow);
+            return onClick
         });
     }
+
+
 
 
     // This function takes in a COLOR, and then creates a new marker
@@ -173,55 +248,45 @@ function initMap() {
     // This function populates the infowindow when the marker is clicked. We'll only allow
     // one infowindow which will open at the marker that is clicked, and populate based
     // on that markers position.
-    function populateInfoWindow(marker, infowindow) {
-        // Check to make sure the infowindow is not already opened on this marker.
+
+    this.myInfoWindow = function(marker, infowindow) {
         if (infowindow.marker != marker) {
-            // Clear the infowindow content to give the streetview time to load.
             infowindow.setContent('');
             infowindow.marker = marker;
-            // Make sure the marker property is cleared if the infowindow is closed.
-            infowindow.addListener('closeclick', function () {
-                infowindow.marker = null;
+
+            // Get location tips from foursquare API
+            var locationComments = [];
+            var FourSquareUrl = 'https://api.foursquare.com/v2/venues/' +
+                marker.id +
+                '/tips?sort=recent&limit=5&v=20171005&client_id=0XMZR5PS5LCN30GDMYO0VRUUCG1Q5EAC0B1B5SM2N1J1JLW3&client_secret=POUI4BOZYELESW0WE3Z5XKJIQ310GDJFBN2UY4SUF5CM4H31';
+
+            $.getJSON(FourSquareUrl,
+                function(marker) {
+                    $.each(marker.response.tips.items, function(i, tips) {
+                        locationComments.push('<li><h1>' + tips.text + '</h1><li>');
+                    });
+
+                }).done(function() {
+
+            // window info from foursquare
+                self.windowInfo = '<h2> What are people saying about ' + marker.name + ' ? </h2>' + '<strong>' + locationComments.join('') + '</strong>';
+            }).fail(function(jqXHR, textStatus, errorThrown) {
+                self.windowInfo = '<h2> What are people saying about ' + marker.name + ' ? </h2>' + '<h3>Ran into an issue... There has been a problem trying to retrieve the locatons info.</h3>';
+                console.log('Something went wrong! please try to refresh your page. ' + textStatus);
             });
-            var streetViewService = new google.maps.StreetViewService();
-            var radius = 50;
+        };
 
-            // In case the status is OK, which means the pano was found, compute the
-            // position of the streetview image, then calculate the heading, then get a
+        // place content in infowindow
+        infowindow.setContent(self.windowInfo);
 
+        infowindow.open(map, marker);
 
-            function getStreetView(data, status) {
+        infowindow.addListener('closeclick', function() {
+            infowindow.marker = null;
+        });
+    }
+};
 
-                if (status == google.maps.StreetViewStatus.OK) {
-
-                    var nearStreetViewLocation = data.location.latLng;
-                    var heading = google.maps.geometry.spherical.computeHeading(
-                        nearStreetViewLocation, marker.position);
-                    infowindow.setContent('<div>' + marker.name + '</div><div id="pano"></div>');
-                    var panoramaOptions = {
-                        position: nearStreetViewLocation,
-                        pov: {
-                            heading: heading,
-                            pitch: 30
-                        }
-                    };
-                    var panorama = new google.maps.StreetViewPanorama(
-                        document.getElementById('pano'), panoramaOptions);
-                } else {
-                    infowindow.setContent('<div>' + marker.name + '</div>' +
-                        '<div>No Street View Found</div>');
-                }
-            }
-
-
-            // Use streetview service to get the closest streetview image within
-            // 50 meters of the markers position
-            streetViewService.getPanoramaByLocation(marker.position, radius, getStreetView);
-            // Open the infowindow on the correct marker.
-            infowindow.open(map, marker);
-        }
-    } /* jshint ignore:end */
-}
 /**********************
 
 My viewModel with Knockout.js
@@ -235,26 +300,19 @@ var vm = {
 
 
 vm.query = ko.observable('');
-vm.search = function (value) {
+vm.showInfo = function(location) {
+    google.maps.event.trigger(location.marker, 'click');
+}
 
-    var tempLocations = [];
-    var tempMarkers = [];
+vm.search = function(value) {
+    var self = this;
 
     for (var i = 0; i < locations.length; i++) {
-        if (locations[i].name.toLowerCase().indexOf(value.toLowerCase()) >= 0) {
-            tempLocations.push(locations[i]);
 
-        }
-        for (var x = 0; x < markersArray.length; x++) {
-            if (markersArray[x].name.toLowerCase().indexOf(value.toLowerCase()) >= 0) {
-                markersArray[x].setMap(map);
-            } else {
-                markersArray[x].setMap(null);
-            }
-        }
+        var match = locations[i].name.toLowerCase().indexOf(value.toLowerCase()) >= 0
+        vm.locations()[i].isShown(match)
+        vm.locations()[i].marker.setVisible(match)
 
-        vm.locations(tempLocations);
-        vm.markersArray(tempMarkers);
     }
 };
 
@@ -262,3 +320,7 @@ vm.search = function (value) {
 vm.query.subscribe(vm.search);
 ko.applyBindings(vm);
 
+
+function errorHandling() {
+    alert("There has been an issue with your internet connection. Please make sure you're connected to the internet and ty again.");
+}
