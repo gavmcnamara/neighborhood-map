@@ -98,6 +98,15 @@ var locations = [{
         },
         id: '43bbc5fdf964a520f02c1fe3',
         isShown: ko.observable(true)
+    },
+    {
+        name: 'George & Jacks Tap Room',
+        location: {
+            lat: 40.7180312,
+            lng: -73.9551834
+        },
+        id: '3fd66200f964a520f3e81ee3',
+        isShown: ko.observable(true)
     }
 ];
 
