@@ -100,7 +100,7 @@ var locations = [{
         isShown: ko.observable(true)
     },
     {
-        name: 'George & Jacks Tap Room',
+        name: 'Dave & Jacks Tap Room',
         location: {
             lat: 40.7180312,
             lng: -73.9551834
