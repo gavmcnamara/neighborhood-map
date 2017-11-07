@@ -107,6 +107,15 @@ var locations = [{
         },
         id: '3fd66200f964a520f3e81ee3',
         isShown: ko.observable(true)
+    },
+    {
+        name: 'Whole Foods',
+        location: {
+            lat: 40.716165,
+            lng: -73.95977
+        },
+        id: '57ffc2e438fad9d2a9122e23',
+        isShown: ko.observable(true)
     }
 ];
 
