@@ -117,6 +117,15 @@ var locations = [{
         id: '57ffc2e438fad9d2a9122e23',
         isShown: ko.observable(true)
     }
+    {
+        name: 'The Craic',
+        location: {
+            lat: 40.718624,
+            lng: -73.955107
+        },
+        id: '54890c65498e646a6e088a86',
+        isShown: ko.observable(true)
+    }
 ];
 
 /* jshint ignore:start */
