@@ -118,7 +118,7 @@ var locations = [{
         isShown: ko.observable(true)
     }
     {
-        name: 'The Craic',
+        name: 'The Craic Irish Pub',
         location: {
             lat: 40.718624,
             lng: -73.955107
