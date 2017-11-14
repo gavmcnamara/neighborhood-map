@@ -116,7 +116,7 @@ var locations = [{
         },
         id: '57ffc2e438fad9d2a9122e23',
         isShown: ko.observable(true)
-    }
+    },
     {
         name: 'The Craic Irish & Scottish Pub',
         location: {
