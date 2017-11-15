@@ -125,6 +125,15 @@ var locations = [{
         },
         id: '54890c65498e646a6e088a86',
         isShown: ko.observable(true)
+    },
+    {
+        name: 'Roebling Sports Club',
+        location: {
+            lat: 40.717011,
+            lng: -73.954648
+        },
+        id: '510edd2ce4b0bb3c6aacb533',
+        isShown: ko.observable(true)
     }
 ];
 
