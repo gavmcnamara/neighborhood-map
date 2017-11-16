@@ -127,7 +127,7 @@ var locations = [{
         isShown: ko.observable(true)
     },
     {
-        name: 'Roebling Sports Club',
+        name: 'Roebling Sports Bar',
         location: {
             lat: 40.717011,
             lng: -73.954648
