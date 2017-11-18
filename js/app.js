@@ -47,15 +47,6 @@ var locations = [
         isShown: ko.observable(true)
     },
     {
-        name: 'Grand Ferry Park',
-        location: {
-            lat: 40.7166,
-            lng: -73.9670
-        },
-        id: '45914f89f964a5202f401fe3',
-        isShown: ko.observable(true)
-    },
-    {
         name: 'The Whisky Brooklyn',
         location: {
             lat: 40.72121,
