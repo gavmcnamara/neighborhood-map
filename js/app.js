@@ -11,15 +11,6 @@ My Model with array of locations
 // Create a single latLng literal object.
 var locations = [
     {
-        name: 'Dotory',
-        location: {
-            lat: 40.70783,
-            lng: -73.955655
-        },
-        id: '52bf3053498e754b09a440b5',
-        isShown: ko.observable(true)
-    },
-    {
         name: 'Umami Burger',
         location: {
             lat: 40.7159,
