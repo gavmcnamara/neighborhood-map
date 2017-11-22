@@ -16,7 +16,7 @@ var locations = [
             lat: 40.720736,
             lng: -73.959991
         },
-        id: '',
+        id: '512fb027e4b01ed8dcdffd3c',
         isShown: ko.observable(true)
     },
     {
