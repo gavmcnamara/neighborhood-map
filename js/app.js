@@ -20,15 +20,6 @@ var locations = [
         isShown: ko.observable(true)
     },
     {
-        name: 'Cooper Park',
-        location: {
-            lat: 40.7160,
-            lng: -73.9373
-        },
-        id: '4a3ff382f964a52022a41fe3',
-        isShown: ko.observable(true)
-    },
-    {
         name: 'The Whisky Brooklyn',
         location: {
             lat: 40.72121,
@@ -71,15 +62,6 @@ var locations = [
             lng: -73.9551834
         },
         id: '3fd66200f964a520f3e81ee3',
-        isShown: ko.observable(true)
-    },
-    {
-        name: 'Whole Foods',
-        location: {
-            lat: 40.716165,
-            lng: -73.95977
-        },
-        id: '57ffc2e438fad9d2a9122e23',
         isShown: ko.observable(true)
     },
     {
