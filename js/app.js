@@ -18,7 +18,7 @@ var locations = [
         },
         id: '4a1afeb7f964a520b77a1fe3',
         isShown: ko.observable(true)
-    }
+    },
     {
         name: 'Rough Trade',
         location: {
