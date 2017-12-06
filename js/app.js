@@ -99,6 +99,15 @@ var locations = [
         },
         id: '510edd2ce4b0bb3c6aacb533',
         isShown: ko.observable(true)
+    },
+    {
+        name: 'Sweet Water Grill',
+        location: {
+            lat: 40.718519,
+            lng: -73.959954
+        },
+        id: '3fd66200f964a52069eb1ee3',
+        isShown: ko.observable(true)
     }
 ];
 
